@@ -5,4 +5,4 @@
 | YYYY-MM-DD | x.x.x   | 🪲        | 💡             |
 
 
-## INITIAL RELEASE [v1.0.0 2025-08-03]()
+## INITIAL RELEASE [v0.1.0 2025-08-16]()
