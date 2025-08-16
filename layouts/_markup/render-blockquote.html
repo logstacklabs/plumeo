@@ -1,0 +1,28 @@
+{{ $emojiMap := dict
+        "tip" ":bulb:"
+        "note" ":pencil2:"
+        "caution" ":warning:"
+        "error" ":no_entry_sign:"
+        "success" ":heavy_check_mark:"
+        "important" ":information_source:"
+        "warning" ":triangular_flag_on_post:"
+        "failure" ":x:"
+        "example" ":scroll:"
+        "bug" ":lady_beetle:"
+        "question" ":question:"
+        "quote" ":writing_hand:"
+        "info" ":information_source:"
+        "danger" ":skull_and_crossbones:" }}
+
+{{ $type := lower (.AlertType | default (.Attributes.type | default "plain")) }}
+<blockquote class="plumeo-blockquote plumeo-blockquote__{{ $type }}">
+    {{ if (ne $type "plain") }}
+        <h6 class="plumeo-blockquote__title">
+            {{ transform.Emojify (index $emojiMap $type) }}
+            {{ title (or .AlertTitle | default (.Attributes.title | default $type)) }}
+        </h6>
+    {{ end }}
+    <p class="plumeo-blockquote__content">
+        {{ (plainify .Text) | markdownify }}
+    </p>
+</blockquote>

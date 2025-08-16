@@ -1,0 +1,48 @@
+{{  $post := . }}
+<article class="plumeo-post__card">
+    <a href="{{ $post.item.RelPermalink }}" style="--i: {{ $post.index }};">
+        <div class="plumeo-card__content">
+            <div class="plumeo-card__thumbnail">
+                {{ with $post.item.Params.thumbnail }}
+                    {{ partial "utilities/thumbnail.html" (dict
+                            "thumb" $post.item.Params.thumbnail
+                            "alt" $post.item.Title
+                            "url" $post.item.RelPermalink) }}
+                {{ else }}
+                    {{ $placehold_api := printf "%v" (hugo.Store.Get "placehold_api") }}
+                    {{ $thumb := printf $placehold_api "480x270" $post.item.Title }}
+                    <img src="{{ $thumb }}" width="480" height="270" alt="{{ $post.item.Title }}">
+                {{ end }}
+            </div>
+            <div class="plumeo-card__excerpt">
+                {{ with $post.item }}
+                    <h3>{{ title .Title }}</h3>
+                    {{ $excerpt := (.Params.excerpt | default (.Summary | plainify)) }}
+                    {{ if lt (len $excerpt) 41 }}
+                        {{ errorf "Excerpt len too short.\n\t Source: %s" .Title }}
+                    {{ end }}
+                    <p>{{ $excerpt }}</p>
+                    <div class="plumeo-card__tags">
+                        <i class="fa-solid fa-lg fa-tags"></i>
+                        {{ range first 3 .Params.tags }}
+                            <span>{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    <div class="plumeo-card__meta">
+                        <span>
+                            <i class="fa-regular fa-lg fa-user"></i>
+                            {{ index .Params.authors 0 }}
+                        </span>
+                        <span>
+                            {{ $format := printf "%v" (hugo.Store.Get "dateFormat") }}
+                            <i class="fa-regular fa-lg fa-calendar-days"></i>
+                            <time datetime="{{ .Date | time.Format $format }}">
+                                {{ .Date | time.Format ":date_medium" }}
+                            </time>
+                        </span>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </a>
+</article>

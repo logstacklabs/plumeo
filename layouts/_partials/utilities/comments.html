@@ -1,0 +1,61 @@
+{{ $comments := site.Data.siteconfig.comments }}
+
+{{ if $comments.isActive }}
+    {{ $provider := lower $comments.service_provider }}
+    {{ if eq $provider "giscus" }}
+        {{ with $comments.giscus }}
+            <script src="https://giscus.app/client.js"
+                    data-repo="{{ .repo }}"
+                    data-repo-id="{{ .repo_id }}"
+                    data-category="{{ .category }}"
+                    data-category-id="{{ .category_id }}"
+                    data-mapping="{{ .pathname }}"
+                    data-strict="{{ .strict }}"
+                    data-reactions-enabled="{{ .reactions }}"
+                    data-emit-metadata="{{ .emit_meta }}"
+                    data-input-position="{{ .input_pos }}"
+                    data-theme="{{ .theme }}"
+                    data-lang="{{ .lang }}"
+                    data-loading="{{ .loading }}"
+                    crossorigin="anonymous" async>
+            </script>
+        {{ end }}
+    {{ else if eq $provider "utterances" }}
+        {{ with $comments.utterances }}
+            <script src="https://utteranc.es/client.js"
+                    repo="{{ .repo }}"
+                    issue-term="{{ .issue_term }}"
+                    theme="{{ .theme }}"
+                    label="{{ .label }}"
+                    crossorigin="anonymous" async>
+            </script>
+        {{ end }}
+    {{ else }}
+        {{ $url := .Permalink }}
+        {{ $uid := .File.UniqueID }}
+        {{ $title := title .Title }}
+        {{ with $comments.disqus.shortname }}
+            <h3> COMMENTS ACTIVE </h3>
+            {{ warnf "%v" . }}
+            <div id="disqus_thread"></div>
+            <script>
+                window.disqus_config = function () {
+                    this.page.title = '{{ $title }}';
+                    this.page.url = '{{ $url }}';
+                    this.page.identifier = '{{ $uid }}';
+                };
+
+                (function() {
+                    let script = document.createElement('script');
+                    script.src = 'https://{{ . }}.disqus.com/embed.js';
+                    script.setAttribute('data-timestamp', +new Date());
+                    (document.head || document.body).appendChild(script);
+                })();
+            </script>
+            <noscript>
+                Please enable JavaScript to view the comments
+                <a href="https://disqus.com/?ref_noscript" rel="nofollow">powered by Disqus.</a>
+            </noscript>
+        {{ end }}
+    {{ end }}
+{{ end }}

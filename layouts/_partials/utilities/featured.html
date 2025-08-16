@@ -1,0 +1,45 @@
+{{ $featured := . }}
+<section class="plumeo-slider">
+    <h3 class="plumeo-section__title">Featured Posts</h3>
+    <div class="plumeo-slider__wrapper">
+        {{ range $featured }}
+            {{ $thumb := "" }}
+            {{ with .Params.thumbnail }}
+                {{ $th := partial "functions/resolve-image.html" (dict
+                        "img" .
+                        "width" 800
+                        "height" 450) }}
+                {{ $thumb = $th.url }}
+            {{ else }}
+                {{ $placehold_api := printf "%v" (hugo.Store.Get "placehold_api") }}
+                {{ $thumb = printf $placehold_api "480x270" .Title }}
+            {{ end }}
+            <a href="{{ .Permalink }}" class="plumeo-slide" style="background-image: url('{{ $thumb }}');">
+                <div class="plumeo-slide__overlay slide-overlay">
+                    <h3 class="plumeo-slide__title">{{ .Title }}</h3>
+                    <div class="plumeo-slide__tags plumeo-card__tags">
+                        <i class="fa-solid fa-lg fa-tags"></i>
+                        {{ range first 3 .Params.tags }}
+                            <span>{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    <div class="plumeo-slide__meta plumeo-card__meta">
+                        <span>
+                            <i class="fa-regular fa-lg fa-user"></i>
+                            {{ index .Params.authors 0 }}
+                        </span>
+                        <span>
+                            {{ $format := printf "%s" (.Store.Get "dateFormat") }}
+                            <i class="fa-regular fa-lg fa-calendar-days"></i>
+                            <time datetime="{{ .Date | time.Format $format }}">
+                                {{ .Date | time.Format ":date_medium" }}
+                            </time>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        {{ end }}
+    </div>
+    <button id="slider-btn-prev" class="plumeo-slider__btn plumeo-slider__btn--prev">&#10094;</button>
+    <button id="slider-btn-next" class="plumeo-slider__btn plumeo-slider__btn--next">&#10095;</button>
+</section>

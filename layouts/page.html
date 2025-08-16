@@ -1,0 +1,28 @@
+{{ define "main" }}
+    {{ if eq (lower .Layout) "static" }}
+        {{ partial "utilities/static-pages.html" . }}
+    {{ else }}
+        <article class="plumeo-article">
+            <header class="plumeo-article__header">
+                <h1 class="plumeo-article__title">{{ title .Title }}</h1>
+                <div class="plumeo-article__meta">
+                    {{ partial "utilities/post-meta-top.html" . }}
+                </div>
+            </header>
+
+            <section class="plumeo-article__summary">
+                {{ .Content }}
+            </section>
+
+            <footer class="plumeo-article__footer">
+                {{ partial "utilities/post-meta-base.html" . }}
+            </footer>
+        </article>
+        <section class="plumeo-article__related">
+            {{ partial "utilities/related.html" . }}
+        </section>
+        <section class="plumeo-article__comments">
+            {{ partial "utilities/comments.html" . }}
+        </section>
+    {{ end }}
+{{ end }}

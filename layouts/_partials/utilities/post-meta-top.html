@@ -1,0 +1,61 @@
+<div class="plumeo-article__author">
+    {{ $handle := index .Params.authors 0 -}}
+    {{ $author := index .Site.Data.authors $handle }}
+    {{ $avatar := "" }}
+    {{ $width := 36 }}
+    {{ $height := 36 }}
+    {{ with $author.avatar }}
+        {{ $img := partial "functions/resolve-image.html" (dict
+                "img" $author.avatar
+                "width" $width
+                "height" $height) }}
+        {{ $avatar = $img.url }}
+        {{ $width = $img.width }}
+        {{ $height = $img.height }}
+    {{ else }}
+        {{ $uiavatar_api := printf "%v" (hugo.Store.Get "uiavatar_api") }}
+        {{ $avatar = printf $uiavatar_api ($author.name | default $handle) 36 }}
+    {{ end }}
+    <img src="{{ $avatar }}"
+         width="{{ $width }}"
+         height="{{ $height }}"
+         loading="lazy" alt="author's avatar"/>
+    <span>
+        {{ $url := printf "/authors/%s" ($handle | urlize) -}}
+        <a href="{{ $url | relURL }}">
+            {{ $author.name | default $handle }}
+        </a>
+        {{ $df := printf "%v" (hugo.Store.Get "dateFormat") }}
+        <time datetime="{{ .Date | time.Format $df }}">
+            {{ .Date | time.Format ":date_medium" }}
+        </time>
+    </span>
+</div>
+<div id="share-post" class="plumeo-article__share">
+    <button id="share-toggle-button" class="plumeo-article__share--toggler">
+        <i class="fa-solid fa-share-nodes"></i>{{ "Share" }}
+    </button>
+    <div id="share-icons" class="plumeo-article__share--icons">
+        <button onclick="navigator.clipboard.writeText('{{ .Permalink }}'); alert('Link copied!')">
+            <i class="fa-solid fa-lg fa-link"></i>{{ "Copy Link" }}
+        </button>
+        {{ $pageTitle := .Title }}
+        {{ $pageUrl := .Permalink }}
+        {{ $platforms := site.Data.socialshare.platforms }}
+        {{ range first 5 $platforms }}
+            {{ $url := .url }}
+            {{ $icon := lower .icon }}
+            {{ $title := title .title }}
+            {{ $iconGroup := cond (eq $icon "envelope") "regular" "brands" }}
+            {{ $shareUrl := replace $url "{URL}" (urlquery $pageUrl) }}
+            {{ $shareUrl := replace $shareUrl "{TITLE}" (urlquery $pageTitle) }}
+            <a href="{{ $shareUrl | safeURL }}" target="_blank" rel="noopener noreferrer" title="{{ $title }}" aria-label="{{ $title }}">
+                <i class="fa-{{ $iconGroup }} fa-lg fa-{{ $icon }}"></i>{{ $title }}
+            </a>
+        {{ end }}
+    </div>
+</div>
+<div class="plumeo-article__readtime">
+    <i class="fa-regular fa-clock"></i>
+    <small>{{ .ReadingTime }} min read</small>
+</div>

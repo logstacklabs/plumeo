@@ -1,0 +1,17 @@
+{{ define "main" }}
+    {{ if ne (lower .Layout) "static" }}
+        <section class="plumeo-recent__posts">
+            <h2 class="plumeo-section__title">{{ .Title }}</h2>
+            <div class="plumeo-post__list">
+                {{ range $idx, $item := .Paginator.Pages }}
+                    {{ partial "utilities/post-card.html" (dict "index" $idx "item" $item) }}
+                {{ end }}
+            </div>
+            <div class="plumeo-paginator">
+                {{ partial "utilities/pagination.html" . }}
+            </div>
+        </section>
+    {{ else }}
+        {{ partial "utilities/static-pages.html" . }}
+    {{ end }}
+{{ end }}

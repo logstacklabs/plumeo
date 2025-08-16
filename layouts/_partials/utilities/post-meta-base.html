@@ -1,0 +1,23 @@
+<div class="plumeo-article__tags">
+    <i class="fa-solid fa-lg fa-tags"></i>
+    {{ range .Params.tags }}
+        {{ $url := printf "/tags/%s" (. | urlize) }}
+        <a href="{{ $url | relURL }}">#{{ . }}</a>
+    {{ end }}
+</div>
+
+{{- if gt (len .Params.authors) 1 -}}
+    <div class="plumeo-article__authors">
+        <i class="fa-solid fa-lg fa-users"></i>
+        {{ range .Params.authors }}
+            {{ $url := printf "/authors/%s" (. | urlize) }}
+            <a href="{{ $url | relURL }}">{{ . }}</a>
+        {{ end }}
+    </div>
+{{- end -}}
+
+<div class="plumeo-article__category">
+    <i class="fa-regular fa-lg fa-folder-open"></i>
+    {{ $url := printf "/category/%s" (.Params.category | urlize) }}
+    <a href="{{ $url | relURL }}">{{ .Params.category }}</a>
+</div>

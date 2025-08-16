@@ -1,0 +1,21 @@
+{{ $post_indexes := slice }}
+{{ $pages := . }}
+{{ range $pages }}
+    {{ $rgx := `\.(png|jpg|jpeg|avif|svg|webp)$` }}
+    {{ $excerpt := .Params.excerpt | default .Summary }}
+    {{ $thumb := replaceRE ".*/" "" (.Params.thumbnail | relURL) }}
+    {{ $thumb_path := printf "%s/%s" .RelPermalink $thumb }}
+    {{ $post := (dict
+            "title"         .Title
+            "permalink"     .Permalink
+            "date"          .Date
+            "tags"          .Params.tags
+            "excerpt"       ($excerpt | plainify)
+            "author"        (index .Params.authors 0)
+            "thumb_sm"      ((replaceRE $rgx "-sm.webp" $thumb_path) | absURL)
+            "thumb_md"      ((replaceRE $rgx "-md.webp" $thumb_path) | absURL)
+            "thumb_lg"      ((replaceRE $rgx "-lg.webp" $thumb_path) | absURL)) }}
+    {{ $post_indexes = $post_indexes | append $post }}
+{{ end }}
+
+{{ return $post_indexes }}

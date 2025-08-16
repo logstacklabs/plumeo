@@ -1,0 +1,25 @@
+{{ $footer := site.Data.siteconfig.footer }}
+<div class="plumeo-footer__content">
+    <div class="plumeo-footer__socials">
+        {{ $socials := partial "functions/map-social-urls.html" $footer.socials }}
+        {{ range $socials }}
+            <a href="{{ .url }}" title="{{ .title }}" target="_blank" rel="noreferrer noopener">
+                <i class="{{ .icon }}"></i>
+            </a>
+        {{ end }}
+    </div>
+    <div class="plumeo-footer__links">
+        {{ range $footer.links }}
+            <a href="{{ .anchor }}" target="_blank">{{ title .label }}</a>
+        {{ end }}
+    </div>
+</div>
+<div class="plumeo-footer__copyright">
+    <p>© {{ now.Year }} {{ $footer.copyright_holder | default site.Title }}. All rights reserved.</p>
+    <small>
+        <a href="https://github.com/logstacklabs/plumeo.git" rel="noopener noreferrer" target="_blank">PLUMEO</a> by
+        <a href="https://logstack.dev" rel="noopener noreferrer" target="_blank">LOGSTACK LABS</a> |
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a> | Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">HUGO</a>
+    </small>
+</div>

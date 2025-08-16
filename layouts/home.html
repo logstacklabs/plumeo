@@ -1,0 +1,22 @@
+{{ define "main" }}
+    {{ if  and .IsHome (eq .Paginator.PageNumber 1) }}
+        {{ with (where site.RegularPages "Params.featured" true) }}
+            {{ partial "utilities/featured.html" . }}
+        {{ end }}
+    {{ end }}
+    <section class="plumeo-recent__posts">
+        {{ if  and .IsHome (eq .Paginator.PageNumber 1) }}
+            <h2 class="plumeo-section__title">Latest Posts</h2>
+        {{ end }}
+        <div class="plumeo-post__list">
+            {{ range $idx, $item := .Paginator.Pages }}
+                {{ if ne (lower .Layout) "static" }}
+                    {{ partial "utilities/post-card.html" (dict "index" $idx "item" $item) }}
+                {{ end }}
+            {{ end }}
+        </div>
+        <div class="plumeo-paginator">
+            {{ partial "utilities/pagination.html" . }}
+        </div>
+    </section>
+{{ end }}

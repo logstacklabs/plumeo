@@ -1,0 +1,55 @@
+{{ $author := . }}
+{{ $avatar := "" }}
+{{ $width := 144 }}
+{{ $height := 144 }}
+
+<div class="plumeo-author plumeo-author__card">
+    <div class="plumeo-author__avatar">
+        {{ with $author.avatar }}
+            {{ $img := partial "functions/resolve-image.html" (dict
+                    "img" $author.avatar
+                    "width" $width
+                    "height" $height) }}
+            {{ $avatar = $img.url }}
+            {{ $width = $img.width }}
+            {{ $height = $img.height }}
+        {{ else }}
+            {{ $uiavatar_api := printf "%v" (hugo.Store.Get "uiavatar_api") }}
+            {{ $avatar = printf $uiavatar_api $author.name $width }}
+        {{ end }}
+        <img src="{{ $avatar }}"
+             width="{{ $width }}"
+             height="{{ $height }}"
+             loading="lazy" alt="{{ $author.name }}'s avatar"/>
+    </div>
+    <div class="plumeo-author__bio">
+        {{ with $author.name }}
+            <h4>{{ title . }}</h4>
+        {{ end }}
+        {{ with $author.bio }}
+            <p>{{ . }}</p>
+        {{ end }}
+        <div class="plumeo-author__contact">
+            {{ with $author.email }}
+                <a href="mailto:{{ . }}">
+                    <i class="fa-regular fa-xl fa-envelope"></i>
+                </a>
+            {{ end }}
+            {{ with $author.links.linkedin }}
+                <a href="https://linkedin.com/{{.}}">
+                    <i class="fa-brands fa-xl fa-linkedin-in"></i>
+                </a>
+            {{ end }}
+            {{ with $author.links.github }}
+                <a href="https://github.com/{{ . }}">
+                    <i class="fa-brands fa-xl fa-github"></i>
+                </a>
+            {{ end }}
+            {{ with $author.links.url }}
+                <a href="{{ . }}">
+                    <i class="fa-solid fa-xl fa-globe"></i>
+                </a>
+            {{ end }}
+        </div>
+    </div>
+</div>

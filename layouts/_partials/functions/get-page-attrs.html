@@ -1,0 +1,96 @@
+{{ $page_title := .Title }}
+{{ $site_title := .Site.Title }}
+{{ $site_config := .Site.Data.siteconfig }}
+{{ $site_tagline := .Site.Params.tagline }}
+
+{{ $urls := (dict
+        "home"  site.BaseURL
+        "abs_url" .Permalink
+        "rel_url" .RelPermalink) }}
+
+{{ $desc := .Site.Params.Description }}
+{{ $keywords := .Site.Params.keywords }}
+{{ $tags := .Params.tags | default $keywords }}
+{{ $category := .Params.category | default .Section }}
+
+{{ $is_post := and .IsPage (not .IsHome) (eq .Layout "") }}
+{{ if $is_post }}
+    {{ $desc = .Params.excerpt | default .Summary }}
+    {{ $keywords := ($tags | default .Params.keywords) | default $keywords }}
+{{ end }}
+
+{{ $dateFormat := printf "%v" (hugo.Store.Get "dateFormat") }}
+{{ $modified_date := .Lastmod | time.Format $dateFormat }}
+{{ $published_time := .Date | time.Format ":date_medium" }}
+{{ $published_date := .PublishDate | time.Format $dateFormat }}
+
+{{ $author := dict }}
+{{ if .Params.authors }}
+    {{ $author = (index site.Data.authors (index .Params.authors 0)) }}
+{{ else if .Params.author }}
+    {{ $author = (index site.Data.authors .Params.author) }}
+{{ end }}
+
+{{ $twitter_handle := $site_config.seo.twitter_handle }}
+{{ if not $twitter_handle }}
+    {{ $twitter_handle = (or $site_config.footer.socials.twitter .Site.Data.contact.socials.x) }}
+{{ end }}
+
+{{ $default_images := dict }}
+{{ $image_sources := (dict
+        "author_avatar"     $author.avatar
+        "thumbnail"         .Params.thumbnail
+        "site_logo"         $site_config.branding.logo
+        "site_favicon"      $site_config.branding.favicon
+        "og_image"          $site_config.seo.opengraph_image
+        "tc_image"          $site_config.seo.twitter_card_image) }}
+
+{{ range $key, $val := $image_sources }}
+    {{ with $val }}
+        {{ $width := 500 }}
+        {{ $height := 500 }}
+        {{ if (eq $key "og_image") }}
+            {{ $width = 1280 }}
+            {{ $height = 628 }}
+        {{ else if (eq $key "tc_image") }}
+            {{ $width = 1280 }}
+            {{ $height = 630 }}
+        {{ end }}
+
+        {{ $img := partial "functions/resolve-image.html" (dict
+                "img" .
+                "width" $width
+                "height" $height) }}
+        {{ $default_images = merge $default_images (dict $key $img.url) }}
+    {{ end }}
+{{ end }}
+
+{{ $lang_code := site.Language.LanguageCode }}
+{{ $lang_dir := site.Language.LanguageDirection }}
+{{ $fb_admins_id := $site_config.seo.fb_admins_id }}
+{{ $cc_holder := $site_config.footer.copyright_holder | default ($author.name | default site.Title) }}
+
+{{ $images := partial "_funcs/get-page-images.html" . }}
+
+{{ return (dict
+        "site_title"            $site_title
+        "page_title"            $page_title
+        "site_tagline"          $site_tagline
+        "description"           $desc
+        "urls"                  $urls
+        "images"                $images
+        "default_images"        $default_images
+        "author"                $author
+        "tags"                  $tags
+        "category"              $category
+        "word_count"            .WordCount
+        "keywords"              $keywords
+        "copyright_year"        now.Year
+        "copyright_holder"      $cc_holder
+        "date_modified"         $modified_date
+        "date_published"        $published_date
+        "time_published"        $published_time
+        "fb_admins"             $fb_admins_id
+        "twitter_handle"        $twitter_handle
+        "language_dir"          ($lang_dir | default "ltr")
+        "language_code"         ($lang_code | default "en-US")) }}

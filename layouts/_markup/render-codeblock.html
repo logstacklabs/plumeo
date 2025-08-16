@@ -1,0 +1,30 @@
+{{ $language := .Type | default "plain" }}
+{{ $highlight_line := .Attributes.hl | default 0 }}
+{{ $title := .Attributes.title | default $language }}
+<div class="plumeo-codeblock">
+    <div class="plumeo-codeblock__topbar">
+        <small class="plumeo-codeblock__dots">
+            <i class="fa-regular fa-2xs fa-circle"></i>
+            <i class="fa-regular fa-2xs fa-circle"></i>
+            <i class="fa-regular fa-2xs fa-circle"></i>
+        </small>
+        <small class="plumeo-codeblock__title">
+            <i class="fa-solid fa-sm fa-code"></i>{{ lower $title }}
+        </small>
+        <button id="copy-codeblock" class="plumeo-codeblock__copycode" title="Copy code" aria-label="Copy code to clipboard">
+            <i class="fa-regular fa-sm fa-clipboard"></i>
+        </button>
+    </div>
+    {{ $opts := dict
+            "lineNos" true
+            "noClasses" false
+            "lineNumbersInTable" true
+            "hl_Lines" $highlight_line
+            "wrapperClass" "plumeo-codeblock__content" }}
+
+    {{ if transform.CanHighlight $language }}
+        {{ with transform.HighlightCodeBlock . $opts }}
+            {{ .Wrapped }}
+        {{ end }}
+    {{ end }}
+</div>

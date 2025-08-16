@@ -1,0 +1,17 @@
+{{ with .Paginator }}
+    {{ if .HasPrev }}
+        <a href="{{ .Prev.URL }}" class="plumeo-paginator__prev" aria-label="Previous page">
+            <i class="fa-solid fa-angles-left"></i>
+        </a>
+    {{ end }}
+
+    <span class="plumeo-paginator__curr">
+        Page {{ .PageNumber }} of {{ .TotalPages }}
+    </span>
+
+    {{ if .HasNext }}
+        <a href="{{ .Next.URL }}" class="plumeo-paginator__next" aria-label="Next page">
+            <i class="fa-solid fa-angles-right"></i>
+        </a>
+    {{ end }}
+{{ end }}

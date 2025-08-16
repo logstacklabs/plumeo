@@ -1,0 +1,54 @@
+<div class="plumeo-header">
+    {{ $url := cond .IsHome "#" "/" }}
+    <a href="{{ $url }}" class="plumeo-logo">
+        {{ title .Site.Title }}
+    </a>
+    <button class="plumeo-menu__toggle" id="menu-toggle" aria-label="Toggle Menu">
+        <i id="menu-toggle-icon" class="fa-solid fa-xl fa-bars-staggered"></i>
+    </button>
+    <nav class="plumeo-menu" aria-label="mainmenu list">
+        <ul class="plumeo-menu__list">
+            {{ range .Site.Menus.main }}
+                {{ $u := urls.Parse .URL }}
+                {{ $url = cond $u.IsAbs $u ($u | absURL) }}
+                {{ if .HasChildren }}
+                    {{ warnf " --> Support for submenus on 'Plumeo' will be available in future versions." }}
+                    {{/*
+                    <li class="plumeo-menu__item plumeo-submenu">
+                        <a href="#">{{ title .Name }}</a>
+                        <i class="fa-solid fa-lg fa-plus"></i>
+                        <ul id="submenu-list" class="plumeo-submenu__list">
+                            <li class="plumeo-submenu__item">
+                                <a href="{{ $url }}">{{ title .Name }}</a>
+                            </li>
+                            {{ range .Children }}
+                                {{ $url := urls.Parse .URL }}
+                                {{ $childUrl := cond $url.IsAbs $url ($url | absURL) }}
+                                <li class="plumeo-submenu__item">
+                                    <a href="{{ $childUrl }}">{{ title .Name }}</a>
+                                </li>
+                            {{ end }}
+                        </ul>
+                    </li>
+                    */}}
+                {{ else }}
+                    <li class="plumeo-menu__item">
+                        <a href="{{ $url }}">{{ title .Name }}</a>
+                    </li>
+                {{ end }}
+            {{ end }}
+        </ul>
+    </nav>
+    <div class="plumeo-actions">
+        <button class="plumeo-theme__toggle" id="theme-toggle" aria-label="Toggle theme">
+            <i id="theme-toggle-icon" class="fa-regular fa-xl fa-moon"></i>
+        </button>
+        <div class="plumeo-search">
+            <button class="plumeo-search__toggle" id="search-toggle" aria-label="Toggle Menu">
+                <i id="search-toggle-icon" class="fa-solid fa-lg fa-magnifying-glass"></i>
+            </button>
+            <label for="search-input"></label>
+            <input type="text" id="search-input" name="search-input" class="plumeo-search__input" placeholder="Search...">
+        </div>
+    </div>
+</div>

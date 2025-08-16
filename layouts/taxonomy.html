@@ -1,0 +1,39 @@
+{{ define "main" }}
+    {{ $txTitle := .Title }}
+    {{ $txType := .Data.Singular }}
+    {{ $icon := "fa-solid fa-xl fa-tags" }}
+
+    {{ if eq $txType "author" }}
+        {{ $icon = "fa-regular fa-xl fa-user" }}
+    {{ else if eq $txType "category" }}
+        {{ $icon = "fa-regular fa-lg fa-folder-open" }}
+    {{ end }}
+
+    <section class="plumeo-taxonomy">
+        <h2 class="plumeo-section__title">List of {{ $txTitle | pluralize }}</h2>
+        <div class="plumeo-terms">
+            <ul class="plumeo-term__list">
+                {{ range .Data.Terms.ByCount }}
+                    <li class="plumeo-term__item">
+                        {{ $term := .Page.Data.Term | urlize }}
+                        {{ $termUrl := .Page.Permalink }}
+                        <a href="{{ $termUrl }}">
+                            <i class="{{ $icon }}" aria-hidden="true"></i>
+                            <span class="plumeo-term__name">
+                                {{ if eq $txType "author" }}
+                                    {{ $author := index site.Data.authors $term }}
+                                    {{ $author.name | default $term }}
+                                {{ else }}
+                                    {{ $term }}
+                                {{ end }}
+                            </span>
+                            <span class="plumeo-term__count">
+                                {{ .Count }} <small>posts</small>
+                            </span>
+                        </a>
+                    </li>
+                {{ end }}
+            </ul>
+        </div>
+    </section>
+{{ end }}

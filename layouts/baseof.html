@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{{ $lang := site.Language.LanguageCode | default `en_US` }}
+{{ $dir := site.Language.LanguageDirection | default `ltr` }}
+{{ $theme := site.Data.siteconfig.branding.theme | default "auto" }}
+
+{{ $posts := partial "functions/index-posts.html" .Site.RegularPages }}
+{{ $formatted := $posts | jsonify (dict "indent" "    ") }}
+{{ $post_indexes := resources.FromString "index.json" $formatted }}
+{{ $post_indexes.Publish }}
+
+{{ hugo.Store.Set "dateFormat" (printf "%v" "2006-01-02T15:04:05-07:00") }}
+{{ hugo.Store.Set "placehold_api" (printf "%v" "https://placehold.co/%s/4d4153/d4a373?font=open-sans&text=%s") }}
+{{ hugo.Store.Set "uiavatar_api" (printf "%v" "https://ui-avatars.com/api?name=%s&size=%d&rounded=true&bold=true&background=random") }}
+
+<html lang="{{ $lang }}" dir="{{ $dir }}" data-theme="{{ $theme }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+
+        {{ if .IsHome }}
+            <title>{{ printf "%s | %s" .Site.Title .Site.Params.tagline }}</title>
+        {{ else }}
+            <title>{{ printf "%s | %s" .Title .Site.Title }}</title>
+        {{ end }}
+
+        {{ partial "head.html" . }}
+    </head>
+    <body>
+        <header>
+            {{ partial "header.html" . }}
+        </header>
+        <main class="plumeo-container">
+            {{ block "main" . }}{{ end }}
+        </main>
+        <footer>
+            {{ partial "footer.html" . }}
+        </footer>
+        {{ partialCached "head/js.html" . }}
+    </body>
+</html>

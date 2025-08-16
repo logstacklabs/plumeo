@@ -1,0 +1,17 @@
+{{ $i := dict }}
+{{ $dest := .Destination }}
+{{ $ext := path.Ext $dest }}
+{{ $isSvg := or (eq $ext ".svg") (hasPrefix $ext ".svg") }}
+
+{{ if not $isSvg }}
+    {{ $i = partial "functions/resolve-image.html" (dict
+            "img" $dest "width" 800 "height" 450) }}
+{{ end }}
+
+<img class="plumeo-article__image"
+     src="{{ $i.url | default $dest }}"
+     width="{{ $i.width }}"
+     height="{{ $i.height }}"
+     alt="{{ .PlainText }}"
+     title="{{ or .Title .PlainText }}"
+     loading="{{ .Attributes.load | default "lazy" }}">

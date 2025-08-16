@@ -1,0 +1,26 @@
+{{ define "main" }}
+    <section class="plumeo-recent__posts">
+        {{ $page_title := .Title }}
+        {{ $type := lower .Type }}
+
+        {{ if eq $type "tags" -}}
+            <h2 class="plumeo-section__title">All Posts Tagged "{{ $page_title }}"</h2>
+        {{ else if eq $type "category" }}
+            <h2 class="plumeo-section__title">Category "{{ $page_title }}"</h2>
+        {{ else if eq $type "authors" -}}
+            {{ $author := index site.Data.authors (lower .Title) }}
+            {{ partial "utilities/authorcard.html" $author }}
+            {{ $page_title = ($author.name | default .Title) }}
+            <h2 class="plumeo-section__title">Posts by "{{ $page_title }}"</h2>
+        {{ end }}
+
+        <div class="plumeo-post__list">
+            {{ range $idx, $item := .Paginator.Pages }}
+                {{ partial "utilities/post-card.html" (dict "index" $idx "item" $item) }}
+            {{ end }}
+        </div>
+        <div class="plumeo-paginator">
+            {{ partial "utilities/pagination.html" . }}
+        </div>
+    </section>
+{{ end }}

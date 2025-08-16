@@ -1,0 +1,37 @@
+{{ $alt := .alt }}
+{{ $rel_url := .url }}
+{{ $thumb := .thumb }}
+<picture>
+    {{ $base := printf "%s" (path.BaseName $thumb) }}
+    {{ $ext := printf "%s" (path.Ext $thumb) }}
+
+    {{ $newName := printf "%s/%s-sm.webp" $rel_url $base }}
+    {{ $sm := partial "functions/resolve-image.html" (dict
+            "img" $thumb
+            "width" 480
+            "height" 270
+            "newName" $newName) }}
+
+    {{ $newName = printf "%s/%s-md.webp" $rel_url $base }}
+    {{ $md := partial "functions/resolve-image.html" (dict
+            "img" $thumb
+            "width" 640
+            "height" 360
+            "newName" $newName) }}
+
+    {{ $newName = printf "%s/%s-lg.webp" $rel_url $base }}
+    {{ $lg := partial "functions/resolve-image.html" (dict
+            "img" $thumb
+            "width" 800
+            "height" 450
+            "newName" $newName) }}
+
+    <source media="(max-width: 400px)" srcset="{{ $sm.url }}" type="image/webp"/>
+    <source media="(max-width: 672px)" srcset="{{ $md.url }}" type="image/webp"/>
+    <source media="(min-width: 673px)" srcset="{{ $lg.url }}" type="image/webp"/>
+
+    <img srcset="{{ $sm.url }} 480w, {{ $md.url }} 640w, {{ $lg.url }} 800w"
+         sizes="(max-width: 400px) 480px, (max-width: 672px) 640px, 800px"
+         src="{{ $lg.url }}" width="{{ $lg.width }}" height="{{ $lg.height }}"
+         alt="{{ .Title }}" loading="lazy" />
+</picture>
