@@ -1,0 +1,18 @@
+name = 'Plumeo'
+version = '0.1.0'
+description = 'A lightweight, customizable Hugo blogging theme for developers, and creators who want a minimalist, and elegant blog.'
+homepage = 'https://github.com/logstacklabs/plumeo.git'
+license = 'CC BY-NC-SA 4.0'
+licenselink = 'https://github.com/logstacklabs/plumeo/blob/main/LICENSE'
+tags = [ 'clean', 'lightweight', 'blog', 'professional', 'personal' ]
+features = [ 'Lightweight', 'Responsive', 'Google Analytics Support', 'Goat Analytics Support' ]
+
+min_version = '0.148.0'
+
+[[author]]
+    name = 'Muhammed A.'
+    homepage = 'https://msio.me'
+
+[[author]]
+    name = 'Logstack Labs'
+    homepage = 'https://logstack.dev'
