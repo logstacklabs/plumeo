@@ -1,0 +1,167 @@
+@use '../base/mixins' as *;
+@use '../base/global' as *;
+
+.plumeo-static {
+    &__content {
+        font-family: $font-body;
+    }
+    &__title {
+        text-align: center;
+        margin: 1.5rem 0 .625rem;
+        color: var(--text-primary-color);
+    }
+}
+.plumeo-article {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 0 1rem;
+    &__title {
+        text-align: center;
+    }
+    &__header {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: auto 0;
+    }
+    &__summary {
+        flex: 1;
+    }
+    &__meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: .0625rem solid var(--border-color);
+        border-bottom: .0625rem solid var(--border-color);
+        padding: .5rem .25rem;
+        margin: 1rem auto;
+        flex-wrap: wrap;
+        gap: .5rem;
+        width: 100%;
+        @include font-size(.8rem, 1rem);
+    }
+    &__author {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: .625rem;
+        img {
+            max-width: 2.25rem;
+            max-height: 2.25rem;
+            object-fit: cover;
+            border-radius: 100%;
+        }
+        span {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            a {
+                font-size: 90%;
+                font-weight: 600;
+            }
+            time {
+                font-size: 80%;
+                font-weight: 500;
+            }
+        }
+    }
+    &__readtime {
+        font-weight: 500;
+    }
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 1rem;
+        margin: 1.5rem 0 .5rem;
+        justify-content: center;
+    }
+    &__tags, &__authors, &__category {
+        font-weight: 500;
+        margin: .5rem 0 .25rem;
+        a {
+            font-size: 90%;
+            padding: .125rem .35rem;
+            border-radius: .35rem;
+            border: .0625rem solid var(--border-color);
+        }
+    }
+    &__share {
+        position: relative;
+        display: inline-block;
+        font-family: inherit;
+        &--icons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: .625rem;
+            margin: .35rem auto 0;
+            border-radius: .5rem;
+            min-width: 11.25rem;
+            position: absolute;
+            left: -50%;
+            top: 100%;
+            opacity: 0;
+            z-index: 20;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: all .2s ease-in-out;
+            background: var(--card-bg-color);
+            box-shadow: 0 0 0 .0625rem var(--border-color);
+            a, button {
+                font-size: 90%;
+                color: var(--text-secondary-color);
+            }
+        }
+        &--toggled .plumeo-article__share--icons {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        &--toggler {
+            font-weight: 700;
+            padding: .125rem .35rem;
+            border-radius: .625rem;
+            border: .0625rem solid var(--border-color);
+        }
+    }
+    &__related {
+        margin: 2.5rem auto 1rem;
+        padding-top: 1.5rem;
+        border-top: .0625rem solid var(--border-color);
+        h2 {
+            margin-bottom: 1.5rem;
+        }
+        &--list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+            gap: 1.5rem;
+        }
+        &--item {
+            color: var(--text-primary-color);
+            background: var(--card-bg-color);
+            border: .0625rem solid var(--border-color);
+            border-radius: .625rem;
+            padding: 1rem;
+            transition: all .3s ease-in-out;
+            &:hover {
+                transform: translateY(-.187rem);
+                border-color: var(--accent-color);
+                box-shadow: 0 .313rem .937rem -.313rem var(--hover-glow);
+            }
+            h4 {
+                font-size: 1.2rem;
+                margin-bottom: .5rem;
+            }
+            time {
+                font-size: 87%;
+                color: var(--text-secondary-color);
+            }
+        }
+    }
+    &__comments {
+        padding: 3rem 0 1rem;
+        margin: 1.5rem auto 1rem;
+    }
+}

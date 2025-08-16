@@ -1,0 +1,126 @@
+@use '../base/mixins' as *;
+@use '../base/global' as *;
+
+.plumeo-terms,
+.plumeo-taxonomy {
+    max-width: $mid-vw;
+    margin: 2rem auto;
+}
+
+.plumeo-term {
+    &__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+    }
+    &__item a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--card-bg-color);
+        border-radius: 0.75rem;
+        padding: 0.5rem .75rem;
+        @include font-size(.8rem, 1rem);
+        color: var(--text-secondary-color);
+        box-shadow: 0 .125rem .375rem rgba(0, 0, 0, .08);
+        transition: transform .2s ease, box-shadow 0.2s ease;
+        &:hover {
+            transform: translateY(-.125rem);
+            box-shadow: 0 .25rem .625rem rgba(0,0,0,0.12);
+        }
+        i {
+            margin-right: .5rem;
+            flex-shrink: 0;
+        }
+    }
+    &__name {
+        flex: 1;
+        font-weight: 600;
+        text-wrap: wrap;
+        color: var(--accent-color);
+        transition: color 0.2s ease;
+        &:hover {
+            color: var(--text-primary-color);
+        }
+    }
+    &__count {
+        font-size: 90%;
+        white-space: nowrap;
+        border-radius: 0.5rem;
+        padding: .25rem .5rem;
+        background: var(--border-color);
+        small {
+            font-size: 80%;
+        }
+        @include breakpoint(20rem) {
+            display: none;
+        }
+    }
+}
+
+.plumeo-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+    gap: 2rem;
+    max-width: $mid-vw;
+    &__avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        display: block;
+        object-fit: cover;
+    }
+    &__bio {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        gap: .625rem;
+        h4 {
+            margin-bottom: 0;
+        }
+        p {
+            text-wrap: wrap;
+        }
+    }
+    &__contact {
+        display: flex;
+        gap: .5rem;
+        a i {
+            color: var(--text-primary-color);
+            &:hover {
+                color: var(--accent-color);
+                transform: translateY(-.1rem);
+            }
+        }
+    }
+}
+
+.plumeo-static__content,
+.plumeo-article__summary {
+    ol, ul {
+        margin: .625em 0;
+        padding-left: 1em;
+        line-height: 1.6;
+
+        li {
+            margin-bottom: .5em;
+        }
+    }
+    p code {
+        background: var(--border-color);
+        font-family: $font-jetb;
+        font-size: 84%;
+        padding: .125em .3em;
+        border-radius: .25rem;
+        white-space: nowrap;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        margin: .5rem 0;
+    }
+}

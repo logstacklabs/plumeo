@@ -1,0 +1,50 @@
+@use '../base/mixins' as *;
+@use '../base/global' as *;
+
+[data-theme="light"] .plumeo-codeblock {
+    color: #3c3836;
+    background: #fbf1c7;
+}
+.plumeo-codeblock {
+    border-radius: .625rem;
+    color:#ebdbb2;
+    background:#282828;
+    font-family: $font-jetb;
+    margin: 1rem 0;
+    box-shadow: 0 0 0 .125rem var(--border-color);
+    &__topbar {
+        display: flex;
+        align-items: center;
+        padding: 0 .5rem;
+        justify-content: space-between;
+        border-radius: .5rem .5rem 0 0;
+        border-bottom: .0625rem solid var(--eo-sigil);
+    }
+    &__title {
+        font-style: italic;
+        margin: -.5rem 0;
+    }
+    &__dots {
+        i {
+            margin: 0 -.25rem 0 0;
+            color: yellow;
+            &:first-child {
+                color: red;
+            }
+            &:last-child {
+                color: green;
+            }
+        }
+        @include breakpoint(small) {
+            display: none;
+        }
+    }
+    &__content {
+        padding: .5rem 0 .625rem .25rem;
+        overflow-x: auto;
+        pre:not(:last-of-type) {
+            background: var(--card-bg-color);
+        }
+    }
+    &__copycode {}
+}

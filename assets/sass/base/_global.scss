@@ -1,0 +1,40 @@
+@use 'sass:color';
+@use '@logstack/eon/dist/eon' as *;
+
+@include eon-colors();
+
+:root {
+    --bg-color: var(--eo-night);
+    --card-bg-color: var(--eo-coal);
+    --text-primary-color: var(--eo-sand);
+    --text-secondary-color: var(--eo-taupe);
+    --border-color: var(--eo-graphite);
+    --accent-color: var(--eo-teal);
+    --hover-glow: #{color.change(eon-color-value('teal'), $alpha: 0.1)};
+    --hover-primary: #{color.change(eon-color-value('graphite'), $alpha: 0.1)};
+}
+[data-theme="light"] {
+    --bg-color: var(--eo-powder);
+    --card-bg-color: var(--eo-white);
+    --text-primary-color: var(--eo-pitch);
+    --text-secondary-color: var(--eo-steel);
+    --border-color: var(--eo-cream);
+    --hover-glow: #{color.change(eon-color-value('teal'), $alpha: 0.07)};
+    --hover-primary: #{color.change(eon-color-value('cream'), $alpha: 0.1)};
+}
+
+$min-vw: 20rem;
+$mid-vw: 56rem;
+$max-vw: 84rem;
+
+$font-inter:    'Inter',sans-serif;
+$font-jura:     'Jura', sans-serif;
+$font-exo:      'Exo 2', sans-serif;
+$font-berg:     'Iceberg', sans-serif;
+$font-manr:     'Manrope', sans-serif;
+$font-plex:     'Ibm Plex Sans', sans-serif;
+$font-jetb:     'JetBrains Mono', monospace;
+$font-footer:   'Jura', sans-serif;
+$font-header:   'Exo 2', sans-serif;
+$font-body:     'Manrope',sans-serif;
+$font-logo:     'Iceberg', sans-serif;

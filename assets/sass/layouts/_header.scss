@@ -1,0 +1,140 @@
+@use '../base/mixins' as *;
+@use '../base/global' as *;
+
+header:not(.plumeo-article__header) {
+    padding: 1rem 0;
+    border-bottom: .0625rem solid var(--border-color);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: color-mix(in srgb, var(--bg-color) 80%, transparent);
+    backdrop-filter: blur(.625rem);
+    z-index: 100;
+}
+
+.plumeo-header {
+    gap: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+.plumeo-actions {
+    display: flex;
+    gap: 1rem;
+}
+.plumeo-logo {
+    font-weight: 800;
+    font-family: $font-logo;
+    @include font-size(1rem, 1.625rem);
+}
+.plumeo-menu {
+    display: flex;
+    font-family: $font-header;
+    &__toggle {
+        display: none;
+        cursor: pointer;
+        @include breakpoint(large) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: .625rem;
+            color: var(--text-secondary-color);
+            border: .0625rem solid var(--border-color);
+        }
+    }
+    &__list {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        @include breakpoint(large) {
+            background: color-mix(in srgb, var(--bg-color) 80%, var(--card-bg-color));
+            position: fixed;
+            top: 4.4rem;
+            right: -100%;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            padding: 1.25rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 .625rem .875rem var(--hover-glow);
+            &--active {
+                right: 0;
+            }
+        }
+    }
+    &__item {
+        font-weight: 500;
+        margin: auto .625rem;
+        &:hover {
+            color: var(--accent-color);
+        }
+        @include breakpoint(large) {
+            margin: .625rem auto;
+        }
+        a {
+            color: var(--text-color);
+        }
+    }
+}
+.plumeo-submenu {
+    display: none;
+}
+.plumeo-theme {
+    &__toggle {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        color: var(--text-secondary-color);
+        border: .0625rem solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-self: right;
+        &:hover {
+            color: var(--text-primary-color);
+            border-color: var(--text-primary-color);
+            transform: rotate(15deg);
+        }
+    }
+}
+.plumeo-search {
+    position: relative;
+    &__toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        color: var(--text-secondary-color);
+        border: .0625rem solid var(--border-color);
+    }
+    &__input {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        opacity: 0;
+        width: 16rem;
+        pointer-events: none;
+        transform: translateY(-.625rem);
+        z-index: 1000;
+        padding: .5rem 1rem;
+        visibility: hidden;
+        transition: all .3s ease;
+        background: var(--card-bg-color);
+        box-shadow: 0 .125rem .25rem var(--hover-glow);
+        &--active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            margin: .25rem;
+            border-radius: 1.25rem;
+            transform: translateY(0);
+            border: .125rem solid var(--border-color);
+        }
+    }
+}

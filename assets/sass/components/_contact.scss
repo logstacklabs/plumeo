@@ -1,0 +1,118 @@
+@use '../base/mixins' as *;
+
+.plumeo-contact {
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 2.25rem;
+        margin: 3rem auto;
+        @include breakpoint(60rem) {
+            flex-direction: column;
+        }
+    }
+    &__form {
+        flex: 2;
+        padding: 1.5rem;
+        border-radius: .625rem;
+        box-shadow: 0 .25rem .5rem var(--border-color);
+    }
+    &__card {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1.5rem;
+        border-radius: .625rem;
+        box-shadow: 0 .25rem .5rem var(--border-color);
+        h3 {
+            margin: 0 0 -.625rem;
+        }
+        p {}
+    }
+    &__info {
+        display: flex;
+        align-items: end;
+        justify-content: start;
+        gap: 1rem;
+        i {
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            text-align: center;
+            padding: .75rem 0;
+            border: .0625rem solid var(--accent-color);
+            transition: all .2s ease-in-out;
+            &:hover {
+                color: var(--eo-white);
+                background: var(--accent-color);
+                border: .0625rem solid var(--primary);
+            }
+        }
+        div {
+            display: flex;
+            align-items: start;
+            flex-direction: column;
+            h4 {
+                font-size: 90%;
+                font-weight: 700;
+                margin-bottom: .5rem;
+            }
+            a, p {
+                font-size: 90%;
+                margin-bottom: 0;
+                text-wrap: wrap;
+            }
+        }
+    }
+}
+
+.plumeo-form {
+    &__group {
+        margin-bottom: 1rem;
+    }
+    &__btn {
+        border: .125rem solid var(--border-color);
+        &:hover {
+            color: var(--text-primary-color);
+            border: .125rem solid var(--accent-color);
+            background: var(--hover-glow);
+        }
+    }
+    &__control {
+        width: 100%;
+        padding: .75rem;
+        background: var(--bg-color);
+        color: var(--text-primary-color);
+        border: .125rem solid var(--border-color);
+        border-radius: .5rem;
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 .187rem var(--hover-glow);
+        }
+    }
+    &__response {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem 1.25rem;
+        border-radius: .5rem;
+        font-weight: 500;
+        transition: all .3s ease;
+        box-shadow: 0 .125rem .5rem var(--hover-primary);
+        transform: translateY(5px);
+        &--success {
+            display: block;
+            background: #e6f9f0;
+            color: var(--accent-color);
+            border-left: .25rem solid #1bc47d;
+            transform: translateY(0);
+        }
+        &--failed {
+            display: block;
+            background: #fdecea;
+            color: #8a1f11;
+            border-left: .25rem solid #f03e3e;
+            transform: translateY(0);
+        }
+    }
+}

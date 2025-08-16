@@ -1,0 +1,87 @@
+@use '../base/mixins' as *;
+
+:root {
+    --lg-bg-color: linear-gradient(135deg, var(--eo-latte), var(--eo-sigil));
+}
+.plumeo-error {
+    &__page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 75vh;
+    }
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 37.5rem;
+        text-align: center;
+        padding: 1rem;
+        border-radius: .5rem;
+        color: var(--text-primary-color);
+        background: var(--bg-color);
+        box-shadow: 0 .25rem 1.25rem 0 var(--border-color);
+    }
+    &__code {
+        @include font-size(2.5rem, 7rem);
+        font-weight: 700;
+        line-height: 1;
+        margin: 0;
+        background: var(--lg-bg-color);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    &__divider {
+        width: 80px;
+        height: 4px;
+        margin: 1.5rem auto;
+        background: var(--lg-bg-color);
+        border-radius: 2px;
+    }
+    &__title {
+        @include font-size(1.2rem, 2rem);
+        font-weight: 600;
+        margin: 0 0 1rem;
+    }
+    &__message {
+        @include font-size(1rem, 1.25rem);
+        margin-bottom: 2rem;
+        color: var(--text-primary-color);
+    }
+    &__actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        @include breakpoint(medium) {
+            flex-direction: column;
+            gap: .75rem;
+        }
+    }
+    &__btn {
+        color: var(--eo-powder);
+        background: var(--lg-bg-color);
+        border-radius: .25rem;
+        transition: all 0.3s ease;
+        &:hover {
+            transform: translateY(-2px);
+            color: var(--text-primary-color);
+            background: transparent;
+            border: .125rem solid var(--border-color);
+            box-shadow: 0 .125rem .75rem var(--hover-glow);
+        }
+        &--secondary {
+            background: transparent;
+            color: var(--text-primary-color);
+            border: .125rem solid var(--border-color);
+            &:hover {
+                color: var(--eo-powder);
+                background: var(--lg-bg-color);
+                box-shadow: 0 .25rem .75rem var(--eo-sigil);
+            }
+        }
+    }
+}
+

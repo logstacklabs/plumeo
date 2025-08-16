@@ -1,0 +1,46 @@
+@use '../base/global' as *;
+
+$blockquote-colors: (
+        tip:        #3fb950,
+        note:       #2f81f7,
+        caution:    #664d03,
+        error:      #842029,
+        success:    #0f5132,
+        important:  #084298,
+        warning:    #d29922,
+        failure:    #842029,
+        example:    #3e2f5b,
+        bug:        #5a1e02,
+        question:   #3d0a91,
+        quote:      #4f4f4f,
+        plain:      #4f4f4f,
+        info:       #055160,
+        danger:     #842029
+);
+
+@each $type, $color in $blockquote-colors {
+    .plumeo-blockquote__#{$type} {
+        --blockquote-border: #{$color};
+    }
+}
+
+.plumeo-blockquote {
+    margin: 1rem 0;
+    border-radius: .25rem;
+    color: var(--text-primary-color);
+    background: var(--card-bg-color);
+    border-left: .35rem solid var(--blockquote-border);
+    box-shadow: 0 0 0 .0625rem var(--blockquote-border);
+    &__title {
+        padding: .5rem 1rem 0;
+        margin-bottom: 0;
+        font-weight: 700;
+        i {
+            margin: 0;
+            color: var(--blockquote-border);
+        }
+    }
+    &__content {
+        padding: .625rem 1rem;
+    }
+}
