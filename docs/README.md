@@ -16,7 +16,7 @@ Plumeo is a clean, lightweight and responsive **Hugo theme** designed for writer
 * 🖼️ Local & Remote image resource handling.
 * 📂 SEO friendly (Schema.org markup, Open Graph, Twitter cards, & social meta tags).
 * 🔗 Social Share buttons for different social platforms including (Linkedin, Facebook, Mastodon, BlueSky, Threads, WeChat, etc...).
-* 🧩 Shortcodes currently has only the contact form & card, more shortcodes will be included in future updates.
+* 🧩 Shortcodes for contact form & card, details and kbd elements, figure images with captions, and video embedding for youtube, twitch, and vimeo. More shortcodes will be included in future updates.
 
 ## 📸 Screenshots
 <ul>
@@ -47,15 +47,13 @@ Plumeo is a clean, lightweight and responsive **Hugo theme** designed for writer
 </ul>
 
 ## 🚀 Demo
-- [blog](https://logstack.dev/blog)
+- [blog](https://blog.logstack.dev)
+- [Full Theme Configuration](https://blog.logstack.dev/plumeo-theme-configuration/)
 
 ## 🛠️ Installation
 
-Inside the `themes/` directory of your Hugo site, add as submodule:
+Add the theme as g git submodule:
 
-```bash
-cd themes
-```
 ```bash
 git submodule add https://github.com/logstacklabs/plumeo.git themes/plumeo
 ```

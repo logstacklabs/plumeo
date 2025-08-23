@@ -1,6 +1,6 @@
 {
     "name": "plumeo",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "license": "CC BY-NC-SA 4.0",
     "description": "A lightweight Hugo blogging theme designed for developers, and creators who want a minimalist, and elegant blog.",
     "scripts": {
