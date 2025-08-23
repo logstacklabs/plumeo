@@ -1,0 +1,114 @@
+{{ $allowed_hosts := slice "twitch" "youtube" "vimeo" }}
+
+{{ $err_msg := printf "%v" "The %q shortcode requires %s argument for the %s. See %v" }}
+{{ $id := .Get "id" | default nil }}
+{{ if not $id }}
+    {{ errorf $err_msg .Name "an id" "video id" .Position }}
+{{ end }}
+
+{{ $host := lower (.Get "host") | default nil }}
+{{ if not $host }}
+    {{ errorf $err_msg .Name "a host" "to specify video source" .Position }}
+{{ end }}
+
+{{ if not (in $allowed_hosts $host) }}
+    {{ errorf "The %q shortcode only supports embedding videos from %v" .Name (delimit $allowed_hosts "; ") }}
+{{ end }}
+
+{{ $src := "" }}
+{{ $host_url := "" }}
+{{ $queries := dict }}
+{{ $width := .Get "width" | default 480 }}
+{{ $height := .Get "height" | default 270 }}
+
+{{ with .Get "start" }}
+    {{ $queries = merge $queries (dict "start" .) }}
+{{ end }}
+
+{{ with .Get "end" }}
+    {{ $queries = merge $queries (dict "end" .) }}
+{{ end }}
+
+
+{{ $autoplay := .Get "autoplay" }}
+{{ $controls := .Get "controls" }}
+{{ $loop := .Get "loop" }}
+{{ $mute := .Get "mute" }}
+{{ $loading := .Get "loading" | default "lazy" }}
+
+
+{{ if eq $host "youtube" }}
+    {{ $host_url = "https://www.youtube-nocookie.com/embed/%v" }}
+    {{ $queries = merge $queries (dict
+            "rel"       0
+            "loading"   $loading
+            "mute"      ($mute | default 0)
+            "loop"      ($loop | default 0)
+            "autoplay"  ($autoplay | default 0)
+            "controls"  ($controls | default 1)
+            "modestbranding" 1) }}
+
+    {{ with .Get "start" }}
+        {{ $queries = merge $queries (dict "start" .) }}
+    {{ end }}
+
+    {{ with .Get "end" }}
+        {{ $queries = merge $queries (dict "end" .) }}
+    {{ end }}
+
+{{ else if eq $host "twitch" }}
+    {{ $host_url = "https://player.twitch.tv/?video=%v" }}
+    {{ $queries = merge $queries (dict
+            "loading"   $loading
+            "autoplay"  ($autoplay | default false)
+            "controls"  ($controls | default true)
+            "mute"      ($mute | default false))
+    }}
+
+    {{ with .Get "parent" }}
+        {{ $queries = merge $queries (dict "parent"  .) }}
+    {{ else }}
+        {{ errorf $err_msg .Name "a parent" "Twitch's parent domain" .Position }}
+    {{ end }}
+
+    {{ with .Get "time" }}
+        {{ $queries = merge $queries (dict "time" .) }}
+    {{ end }}
+
+{{ else if eq $host "vimeo" }}
+    {{ $host_url = "https://player.vimeo.com/video/%v?" }}
+
+    {{ $queries = merge $queries (dict
+            "title"     1
+            "dnt"       1
+            "loading"   $loading
+            "mute"      ($mute | default 0)
+            "loop"      ($loop | default 0)
+            "autoplay"  ($autoplay | default 0)
+            "controls"  ($controls | default 1)
+            ) }}
+
+    {{ with .Get "t" }}
+        {{ $queries = merge $queries (dict "t" .) }}
+    {{ end }}
+{{ end }}
+
+{{ $src = printf $host_url $id }}
+{{ with querify $queries }}
+    {{ $src = printf "%s?%s" $src . }}
+{{ end }}
+
+{{ $allow_list := slice
+        "accelerometer" "autoplay"
+        "clipboard-write" "encrypted-media"
+        "gyroscope" "picture-in-picture" "web-share" }}
+{{ $refpolicy := "strict-origin-when-cross-origin" }}
+{{ $title := .Get "title" | default (printf "%s video player" $host) }}
+
+
+<div class="plumeo-iframe_wrapper">
+    <iframe class="plumeo-iframe" width="{{ $width }}" height="{{ $height }}"
+            src="{{ $src }}" title="{{ $title }}"
+            allow="{{ delimit $allow_list "; " }}"
+            referrerpolicy=" {{ $refpolicy }}" allowfullscreen></iframe>
+</div>

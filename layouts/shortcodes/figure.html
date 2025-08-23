@@ -1,0 +1,39 @@
+{{ $src := .Get "src" }}
+{{ if not $src }}
+    {{ errorf "The %q shortcode rerquires image soure to be passed to the %q argument. See: %q" .Name "src" .Position }}
+{{ end }}
+
+{{ $alt := .Get "alt" | default "" }}
+{{ $title := .Get "title" | default "" }}
+{{ $load := .Get "loading" | default "lazy" }}
+{{ $width := .Get "width" | default 480 }}
+{{ $height := .Get "height" | default 270 }}
+{{ $capt := .Get "caption" | default "" }}
+{{ $capt_url := .Get "caption_url" | default "" }}
+
+<figure class="plumeo-figure">
+    {{ $i := dict }}
+    {{ $ext := path.Ext $src }}
+    {{ $isSvg := or (eq $ext ".svg") (hasPrefix $ext ".svg") }}
+
+    {{ if not $isSvg }}
+        {{ $i = partial "functions/resolve-image.html" (dict
+                "img" $src "width" $width "height" $height) }}
+    {{ end }}
+
+    <img class="plumeo-figure__image"
+         src="{{ $i.url | default $src }}"
+         width="{{ $i.width | default $width }}"
+         height="{{ $i.height | default $height }}"
+         alt="{{ $alt }}" title="{{ $title }}" loading="{{ $load }}">
+
+    {{ with $capt }}
+        <figcaption class="plumeo-figure__figcaption">
+            {{ with $capt_url }}
+                <a href="{{ . }}">{{ $capt }}</a>
+            {{ else }}
+                <p>{{ . }}</p>
+            {{ end }}
+        </figcaption>
+    {{ end }}
+</figure>

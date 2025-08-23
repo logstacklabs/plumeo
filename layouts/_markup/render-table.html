@@ -1,0 +1,25 @@
+<div class="plumeo-table__container">
+    <table class="plumeo-table"
+           {{ range $k, $v := .Attributes }}
+               {{ if $v }}{{ printf " %s=%q" $k $v | safeHTMLAttr }}{{ end }}
+           {{ end }}>
+        <thead class="plumeo-table__thead">
+        {{ range .THead }}
+            <tr class="plumeo-table__tr">
+                {{ range . }}
+                    <th class="plumeo-table__th">{{ .Text }}</th>
+                {{ end }}
+            </tr>
+        {{ end }}
+        </thead>
+        <tbody class="plumeo-table__tbody">
+        {{ range .TBody }}
+            <tr class="plumeo-table__tr">
+                {{ range . }}
+                    <td class="plumeo-table__td">{{ .Text }}</td>
+                {{ end }}
+            </tr>
+        {{ end }}
+        </tbody>
+    </table>
+</div>

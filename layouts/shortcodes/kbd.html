@@ -1,0 +1,8 @@
+{{ $content := split (.Get 0) "+" }}
+{{ $len := len $content }}
+
+{{ if eq $len 1 }}
+    <kbd class="plumeo-kbd">{{ .Get 0 }}</kbd>
+{{ else }}
+    {{ range $i, $kbd := $content }}<kbd class="plumeo-kbd">{{ $kbd }}</kbd>{{ if and (ge $i 0) (lt $i (sub $len 1)) }}{{ "+" }}{{ end }}{{ end }}
+{{ end }}

@@ -36,13 +36,22 @@
         <i class="fa-solid fa-share-nodes"></i>{{ "Share" }}
     </button>
     <div id="share-icons" class="plumeo-article__share--icons">
-        <button onclick="navigator.clipboard.writeText('{{ .Permalink }}'); alert('Link copied!')">
-            <i class="fa-solid fa-lg fa-link"></i>{{ "Copy Link" }}
-        </button>
         {{ $pageTitle := .Title }}
         {{ $pageUrl := .Permalink }}
-        {{ $platforms := site.Data.socialshare.platforms }}
-        {{ range first 5 $platforms }}
+        {{ $social_share := site.Data.socialshare }}
+        {{ if $social_share.buttons.show_copy_button }}
+            <button onclick="navigator.clipboard.writeText('{{ .Permalink }}'); alert('Link copied!')">
+                <i class="fa-solid fa-lg fa-link"></i>{{ "Copy Link" }}
+            </button>
+        {{ end }}
+        {{ if $social_share.buttons.show_print_button }}
+            <button onclick="window.print()">
+                <i class="fa-solid fa-lg fa-print"></i> {{ "Print to PDF" }}
+            </button>
+        {{ end }}
+        {{ $platforms := $social_share.platforms }}
+        {{ $count := $social_share.max_icon_count }}
+        {{ range first $count $platforms }}
             {{ $url := .url }}
             {{ $icon := lower .icon }}
             {{ $title := title .title }}

@@ -1,0 +1,6 @@
+{{ $title := .Get "title" }}
+{{ $summary := .Get "summary" | default ($title | default "Click to view details") }}
+<details class="plumeo-details" {{ with $title }}title="{{ . }}"{{ end }}>
+    <summary>{{ $summary | .Page.RenderString }}</summary>
+    {{ .Inner | .Page.RenderString }}
+</details>
