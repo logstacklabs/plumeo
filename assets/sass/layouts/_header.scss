@@ -10,6 +10,9 @@ header:not(.plumeo-article__header) {
     background: color-mix(in srgb, var(--bg-color) 80%, transparent);
     backdrop-filter: blur(.625rem);
     z-index: 100;
+    @include media('print') {
+        display: none;
+    }
 }
 
 .plumeo-header {

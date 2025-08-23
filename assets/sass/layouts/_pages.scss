@@ -112,6 +112,9 @@
                 font-size: 90%;
                 color: var(--text-secondary-color);
             }
+            @include media('print') {
+                display: none;
+            }
         }
         &--toggled .plumeo-article__share--icons {
             opacity: 1;
@@ -159,9 +162,18 @@
                 color: var(--text-secondary-color);
             }
         }
+        @include media('print') {
+            display: none;
+        }
     }
     &__comments {
         padding: 3rem 0 1rem;
         margin: 1.5rem auto 1rem;
+        @include media('print') {
+            display: none;
+        }
+    }
+    &__image {
+        border-radius: .5rem;
     }
 }

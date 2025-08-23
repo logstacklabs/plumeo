@@ -56,3 +56,9 @@
         @error "🚫 Invalid breakpoint `#{$size}`. Expected unit value (e.g., 20rem, 480px) or one of: #{map.keys($breakpoints)}.";
     }
 }
+
+@mixin media($type) {
+    @media #{$type} {
+        @content;
+    }
+}
