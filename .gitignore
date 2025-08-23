@@ -10,13 +10,12 @@
 node_modules/
 hugo.toml
 package-lock.json
-
-static/*
-!static/.gitkeep
-data/*
-!data/.gitkeep
-content/*
-!content/.gitkeep
+.hugo_build.lock
+resources/
+public/
+static/
+data/
+content/
 
 assets/css/
 assets/images/

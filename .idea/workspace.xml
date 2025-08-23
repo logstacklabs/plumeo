@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e503aa31-e7dc-4418-99c0-e156450320e8" name="Changes" comment=".idea" />
+    <list default="true" id="e503aa31-e7dc-4418-99c0-e156450320e8" name="Changes" comment=".idea">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sass/base/_boilerplate.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sass/base/_boilerplate.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sass/base/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sass/base/_mixins.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sass/components/_index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sass/components/_index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sass/layouts/_footer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sass/layouts/_footer.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sass/layouts/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sass/layouts/_header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sass/layouts/_pages.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sass/layouts/_pages.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sass/layouts/_sections.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sass/layouts/_sections.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/_partials/utilities/post-meta-top.html" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/_partials/utilities/post-meta-top.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/theme.toml" beforeDir="false" afterPath="$PROJECT_DIR$/theme.toml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +31,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="SCSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -34,6 +51,9 @@
     &quot;accountId&quot;: &quot;5256a118-cecb-444e-8062-46506353542f&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -51,15 +71,15 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;24.5.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;24.2.0&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/msio/MEGA/DEV/PR0J3CTS/W3BZ/plumeo/content/_privacy&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.19.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.19.123&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/msio/MEGA/DEV/PR0J3CTS/W3BZ/plumeo&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/msio/.nvm/versions/node/v24.5.0/bin/node&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/home/msio/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
@@ -111,7 +131,12 @@
       <workItem from="1754902917168" duration="27943000" />
       <workItem from="1754986176293" duration="47766000" />
       <workItem from="1755107410139" duration="89260000" />
-      <workItem from="1755357202648" duration="20131000" />
+      <workItem from="1755357202648" duration="20651000" />
+      <workItem from="1755772684804" duration="1419000" />
+      <workItem from="1755774251118" duration="323000" />
+      <workItem from="1755774643406" duration="27075000" />
+      <workItem from="1755863536834" duration="23781000" />
+      <workItem from="1755938191910" duration="1509000" />
     </task>
     <task id="LOCAL-00001" summary="Docs, git-files, &amp; hugo defaults.">
       <option name="closed" value="true" />
@@ -145,7 +170,31 @@
       <option name="project" value="LOCAL" />
       <updated>1755377877957</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="SCSS Asset Files">
+      <option name="closed" value="true" />
+      <created>1755378533713</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1755378533713</updated>
+    </task>
+    <task id="LOCAL-00006" summary="JS Asset Files">
+      <option name="closed" value="true" />
+      <created>1755378645740</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1755378645740</updated>
+    </task>
+    <task id="LOCAL-00007" summary=".idea">
+      <option name="closed" value="true" />
+      <created>1755378659949</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1755378659949</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,6 +204,8 @@
     <MESSAGE value="Docs, git-files, &amp; hugo defaults." />
     <MESSAGE value="Changelog" />
     <MESSAGE value="Hugo layout files" />
+    <MESSAGE value="SCSS Asset Files" />
+    <MESSAGE value="JS Asset Files" />
     <MESSAGE value=".idea" />
     <option name="LAST_COMMIT_MESSAGE" value=".idea" />
   </component>
